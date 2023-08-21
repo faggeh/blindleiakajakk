@@ -12,27 +12,51 @@ export class NavItem {
 
 export const navItems: NavItem[] = [
   {
-    displayName: 'Performance',
+    displayName: 'Dashboard',
     iconName: 'bar_chart',
-    route: 'Performance',
+    route: 'dashboard'
+  },
+  {
+    displayName: 'Race admin',
+    iconName: 'bar_chart',
+    route: 'raceadmin',
     children: [
       {
-        displayName: 'Operations',
+        displayName: 'New Race',
         iconName: 'show_chart',
-        route: 'Performance/Operations'
-      },
-      {
-        displayName: 'Machines',
-        iconName: 'show_chart',
-        route: 'Performance/Machines'
-      },
-      {
-        displayName: 'Export Data',
-        iconName: 'show_chart',
-        route: 'Performance/ExportData'
+        route: 'raceadmin/newrace'
       }
     ]
   },
+  {
+    displayName: 'User',
+    iconName: 'bar_chart',
+    route: 'user',
+    children: [
+      {
+        displayName: 'Login',
+        iconName: 'show_chart',
+        route: 'sign-in'
+      },
+      {
+        displayName: 'Forgot Password',
+        iconName: 'show_chart',
+        route: 'forgot-password'
+      },
+      {
+        displayName: 'Verify Email',
+        iconName: 'show_chart',
+        route: 'verify-email-address'
+      },
+      {
+        displayName: 'Register User',
+        iconName: 'show_chart',
+        route: 'register-user'
+      }
+
+    ]
+  },
+
 ];
 
 @Component({

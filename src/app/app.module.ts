@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SignInComponent } from './authentication/sign-in/sign-in.component';
@@ -18,6 +17,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { IconComponent } from './components/icons/icon.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { MenuListItemComponent } from './components/menu-list-item/menu-list-item.component';
+import { NewRaceComponent } from './components/race-admin/new-race/new-race.component';
+import { RaceAdminContainerComponent } from './components/race-admin/race-admin-container/race-admin-container.component';
+import { AppRoutingModule, appRoutes } from './app.routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, ActivatedRouteSnapshot, provideRouter } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,16 +34,19 @@ import { MenuListItemComponent } from './components/menu-list-item/menu-list-ite
     VerifyEmailComponent,
     IconComponent,
     NavBarComponent,
-    MenuListItemComponent
+    MenuListItemComponent,
+    RaceAdminContainerComponent,
+    NewRaceComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'blindleia'),
     AngularFirestoreModule, // Only required for database features
     AngularFireAuthModule, // Only required for auth features,
-    AngularFireStorageModule, // Only required for storage features
-    AppRoutingModule,
+    AngularFireStorageModule, // Only required for storage features,
+    ReactiveFormsModule,
     MaterialModules
   ],
   providers: [
