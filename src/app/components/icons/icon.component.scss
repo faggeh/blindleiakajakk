@@ -1,0 +1,18 @@
+.nov-icon {
+    display: inline-block;
+
+    .mat-icon {
+        svg {
+            height: inherit;
+            width: inherit;
+        }
+    }
+}
+
+button {
+    &.mat-menu-item {
+        .nov-icon {
+            margin-right: 12px;
+        }
+    }
+}

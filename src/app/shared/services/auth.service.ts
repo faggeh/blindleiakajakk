@@ -4,14 +4,18 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import firebase from 'firebase/compat/app';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any; // Save logged in user data
+  public userData: firebase.User | null = null; // Save logged in user data
+  public userData$: BehaviorSubject<firebase.User | null> = new BehaviorSubject<firebase.User | null>(this.userData);
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -23,9 +27,12 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
+        this.userData$.next(this.userData);
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
+        this.userData = null;
+        this.userData$.next(this.userData);
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
@@ -38,6 +45,8 @@ export class AuthService {
       .then((result) => {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
+          this.userData = user;
+          this.userData$.next(this.userData);
           if (user) {
             this.router.navigate(['dashboard']);
           }
@@ -107,6 +116,8 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      this.userData = null;
+      this.userData$.next(this.userData);
       this.router.navigate(['sign-in']);
     });
   }

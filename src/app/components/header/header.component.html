@@ -1,0 +1,35 @@
+<mat-toolbar color="background" class="mat-elevation-z2">
+  <mat-toolbar-row>
+    <nov-icon id="nov-logo" [size]="82" icon="nov-logo"></nov-icon>
+    <div>Blindleialøpet™</div>
+    <div class="flex-layout-spacer"></div>
+    <mat-form-field style="font-size: 15px; padding-top: 20px">
+      <mat-label>Select Year</mat-label>
+      <mat-select
+        [compareWith]="compareYears"
+        [(value)]="selectedYear"
+        #year
+        (selectionChange)="onSelectedYear(selectedYear)"
+      >
+        <mat-option
+          *ngFor="let year of years"
+          [value]="year"
+          style="font-size: 15px"
+          >{{ year }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <div style="width: 5em"></div>
+    <div class="flex-layout-spacer"></div>
+    <label>{{ authService.userData?.displayName }}</label>
+    <button color="primary" mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a *ngIf="!isAuthenticated" mat-menu-item routerLink="/CheckAuthSession"
+        >Login</a
+      >
+      <a *ngIf="isAuthenticated" mat-menu-item routerLink="/Logout">Logout</a>
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

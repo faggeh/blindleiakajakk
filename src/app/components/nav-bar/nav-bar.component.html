@@ -1,0 +1,12 @@
+<div fxLayout="row" fxLayoutAlign="start center" class="nav-bar-theme-color" style="height:40px">
+  <button mat-button color="primary" (click)="onMenuButtonClicked()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div *ngFor="let url of urls; let last = last" [ngClass]="{'active': last}">
+    <!-- The 'pre' prevents space to be removed -->
+    <pre ng-bind-html-unsafe="expression" ng-trim="false" *ngIf="!last"
+      (click)="navigateTo(url)">{{' / ' + friendlyName(url)}}</pre>
+    <pre ng-bind-html-unsafe="expression" ng-trim="false" *ngIf="last">{{' / ' + friendlyName(url)}}</pre>
+  </div>
+  <div class="flex-layout-spacer"></div>
+</div>
